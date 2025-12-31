@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026! | Hardik Rohit</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Chicle&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mustard: #FFDB58;
+            --teal: #008080;
+            --dark-teal: #004d4d;
+            --off-white: #F9F7F2;
+            --orange: #FF7F50;
+            --black: #2C3E50;
+            --card-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--off-white);
+            color: var(--black);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Chicle', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark-teal);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px var(--mustard);
+            transform: rotate(-2deg);
+        }
+
+        .btn {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Chicle', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--black);
+            transition: transform 0.1s, box-shadow 0.1s;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--black);
+        }
+
+        /* --- 1. Hero Screen --- */
+        #hero {
+            background: radial-gradient(circle at center, #1a2a6c, #b21f1f, #fdbb2d); /* Fallback */
+            background: linear-gradient(to bottom, #001f3f, #004d4d);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #fireworks-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: var(--mustard);
+            text-shadow: 4px 4px 0px #000;
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            margin-top: 3rem;
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+        }
+
+        /* --- 2. Greeting Card --- */
+        #greeting {
+            background-color: var(--mustard);
+            overflow: hidden;
+        }
+
+        .card-frame {
+            background: white;
+            border: 4px solid var(--black);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transform: translateX(-100vw) rotate(-5deg);
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .card-frame.visible {
+            transform: translateX(0) rotate(-2deg);
+        }
+
+        .meme-cat {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: wiggle 2s infinite ease-in-out;
+        }
+
+        /* --- 3. Bucket List --- */
+        #bucket-list {
+            background-color: var(--off-white);
+        }
+
+        .checklist {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .check-item {
+            background: white;
+            border: 2px solid var(--black);
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        .check-item:hover {
+            transform: scale(1.02);
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--black);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--off-white);
+        }
+
+        .check-item.checked .checkbox::after {
+            content: '✓';
+            font-weight: bold;
+            color: var(--teal);
+        }
+
+        .check-item.checked span {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* --- 4. Music Player --- */
+        #music {
+            background-color: var(--teal);
+            color: white;
+        }
+
+        #music .section-title {
+            color: var(--mustard);
+            text-shadow: 2px 2px var(--black);
+        }
+
+        .cassette-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .cassette {
+            background: #333;
+            border-radius: 12px;
+            padding: 10px;
+            position: relative;
+            height: 100px;
+            cursor: pointer;
+            border: 3px solid rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cassette:hover {
+            transform: scale(1.02);
+        }
+
+        .cassette::before, .cassette::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .cassette::before { left: 20%; }
+        .cassette::after { right: 20%; }
+
+        .cassette-label {
+            background: var(--off-white);
+            width: 60%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            z-index: 1;
+            font-family: 'Chicle', cursive;
+            color: var(--black);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .cassette.playing {
+            border-color: var(--mustard);
+            box-shadow: 0 0 15px var(--mustard);
+        }
+
+        .cassette.playing .cassette-label {
+            background: var(--mustard);
+        }
+
+        /* Visualizer */
+        .visualizer {
+            display: flex;
+            gap: 3px;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 20px;
+            align-items: flex-end;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cassette.playing .visualizer {
+            opacity: 1;
+        }
+
+        .bar {
+            width: 4px;
+            background: #fff;
+            animation: sound 0.5s infinite alternate;
+        }
+        .bar:nth-child(1) { animation-delay: 0.1s; height: 10px; }
+        .bar:nth-child(2) { animation-delay: 0.3s; height: 15px; }
+        .bar:nth-child(3) { animation-delay: 0.2s; height: 8px; }
+        .bar:nth-child(4) { animation-delay: 0.4s; height: 18px; }
+        .bar:nth-child(5) { animation-delay: 0.1s; height: 12px; }
+
+        /* --- 5. Vouchers --- */
+        #vouchers {
+            background-color: var(--orange);
+        }
+        
+        #vouchers .section-title {
+            color: var(--off-white);
+            text-shadow: 2px 2px var(--black);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: var(--card-shadow);
+            border-radius: 12px;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 3px solid var(--black);
+        }
+
+        .flip-card-front {
+            background-color: var(--off-white);
+            color: black;
+        }
+
+        .flip-card-back {
+            background-color: var(--teal);
+            color: white;
+            transform: rotateY(180deg);
+            padding: 1rem;
+        }
+
+        .voucher-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+
+        /* --- 6. Loader --- */
+        #loader-section {
+            background-color: var(--black);
+            color: var(--off-white);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 30px;
+            background-color: #444;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 2px solid white;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--mustard),
+                var(--mustard) 10px,
+                var(--orange) 10px,
+                var(--orange) 20px
+            );
+            transition: width 2.5s ease-in-out;
+        }
+
+        .bug-fix {
+            font-family: monospace;
+            color: #0f0;
+            font-size: 0.9rem;
+            min-height: 1.2em;
+        }
+
+        /* Scroll Hint Text */
+        .scroll-hint {
+            margin-top: 3rem;
+            font-size: 1.3rem;
+            font-family: 'Chicle', cursive;
+            animation: bounce 2s infinite;
+            opacity: 0.9;
+            cursor: default;
+        }
+
+        /* --- 7. Final Note (Envelope) --- */
+        #final-note {
+            background-color: var(--mustard);
+            padding-bottom: 5rem;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin-top: 50px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: var(--orange);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Flaps */
+        .envelope::before { /* Left flap */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid var(--dark-teal);
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+            z-index: 12;
+        }
+        .envelope::after { /* Right flap */
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 150px solid var(--teal);
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+            z-index: 12;
+        }
+
+        .flap-bottom {
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             width: 0; 
+             height: 0; 
+             border-left: 150px solid transparent;
+             border-right: 150px solid transparent;
+             border-bottom: 100px solid #cc6640; /* Slightly darker orange */
+             z-index: 13;
+             border-radius: 0 0 10px 10px;
+        }
+
+        .flap-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0; 
+            height: 0; 
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #e67348; /* Lighter orange */
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out, z-index 0.6s;
+            z-index: 14;
+        }
+
+        .letter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            transition: transform 0.6s ease-in-out 0.4s;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .letter h3 {
+            color: var(--orange);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .letter p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Open State */
+        .envelope-wrapper.open .flap-top {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translateY(-160px);
+            z-index: 11;
+        }
+
+        .instruction {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--black);
+            opacity: 0.7;
+        }
+
+        /* --- Animations --- */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes sound {
+            0% { height: 5px; }
+            100% { height: 100%; }
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .hero-title { font-size: 6rem; }
+            .section-title { font-size: 3.5rem; }
+            .container { padding: 4rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Hero Screen -->
+    <section id="hero" class="container">
+        <canvas id="fireworks-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Happy New Year<br>Hardik Rohit!</h1>
+            <p class="hero-sub">Another year of chaos pending... 🎆</p>
+            <a href="#greeting" class="btn">See what I made for you, Hardik 👇</a>
+            <div class="scroll-indicator">⌄</div>
+        </div>
+    </section>
+
+    <!-- 2. The Greeting Card -->
+    <section id="greeting" class="container">
+        <div class="card-frame" id="greeting-card">
+            <div class="meme-cat">🐱🎉</div>
+            <h2>Hey Hardik Rohit!</h2>
+            <p style="margin: 1rem 0; font-size: 1.1rem; line-height: 1.6;">
+                Thanks for sticking by me in 2025. You made the tough days easier and the good days slightly more chaotic (in a good way).
+            </p>
+            <p><strong>Let's crush 2026!</strong></p>
+        </div>
+        <div class="scroll-hint">See our goals next... 👇</div>
+    </section>
+
+    <!-- 3. Bucket List -->
+    <section id="bucket-list" class="container">
+        <h2 class="section-title">Hardik's Goals for 2026</h2>
+        <p style="margin-bottom: 2rem;">(Let's actually do these)</p>
+        <ul class="checklist">
+            <li class="check-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <span>Actually stick to a gym routine 💪</span>
+            </li>
+            <li class="check-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <span>Go on that trip we keep planning 🗺️</span>
+            </li>
+            <li class="check-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <span>Save money (for real this time) 💰</span>
+            </li>
+            <li class="check-item" onclick="toggleCheck(this)">
+                <div class="checkbox"></div>
+                <span>Eat good food with good people 🍕</span>
+            </li>
+        </ul>
+        <div class="scroll-hint" style="color: var(--teal);">Vibes loading... 🎵</div>
+    </section>
+
+    <!-- 4. Music Player -->
+    <section id="music" class="container">
+        <h2 class="section-title">Hardik's 2026 Vibes</h2>
+        <div class="cassette-stack">
+            <div class="cassette" onclick="playTape(this)">
+                <div class="cassette-label">
+                    <span>Tape 1</span>
+                    <small>Count on Me</small>
+                </div>
+                <div class="visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+            <div class="cassette" onclick="playTape(this)">
+                <div class="cassette-label">
+                    <span>Tape 2</span>
+                    <small>FRIENDS Theme</small>
+                </div>
+                <div class="visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+            <div class="cassette" onclick="playTape(this)">
+                <div class="cassette-label">
+                    <span>Tape 3</span>
+                    <small>2026 Energy</small>
+                </div>
+                <div class="visualizer">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint" style="color: var(--mustard);">Claim your gifts... 🎁</div>
+    </section>
+
+    <!-- 5. Friendship Vouchers -->
+    <section id="vouchers" class="container">
+        <h2 class="section-title">Coupons for Hardik</h2>
+        <div class="cards-grid">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="voucher-icon">🎫</div>
+                        <h3>Tap to Flip</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="voucher-icon">🗣️</div>
+                        <h3>One Free 'I'm Venting' Session</h3>
+                        <p>(No judgment included)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="voucher-icon">🎫</div>
+                        <h3>Tap to Flip</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="voucher-icon">🍔</div>
+                        <h3>Lunch Treat on Me</h3>
+                        <p>Valid anytime in 2026</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="voucher-icon">🎫</div>
+                        <h3>Tap to Flip</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="voucher-icon">💻</div>
+                        <h3>Lifetime Tech Support</h3>
+                        <p>"Did you try restarting it?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint" style="color: var(--off-white);">Almost there... ⚠️</div>
+    </section>
+
+    <!-- 6. The Loader -->
+    <section id="loader-section" class="container">
+        <h2>System Update</h2>
+        <p>Closing Hardik's 2025... Installing 2026...</p>
+        <div class="progress-container">
+            <div class="progress-bar" id="update-bar"></div>
+        </div>
+        <div class="bug-fix" id="bug-text"></div>
+        <div class="scroll-hint" style="color: var(--mustard);">One last thing... 💌</div>
+    </section>
+
+    <!-- 7. The Final Note -->
+    <section id="final-note" class="container">
+        <div class="envelope-wrapper" onclick="openEnvelope(this)">
+            <div class="envelope">
+                <div class="flap-bottom"></div>
+            </div>
+            <div class="flap-top"></div>
+            <div class="letter">
+                <h3>Happy New Year, Hardik! 🌟</h3>
+                <p>Wishing you success, peace, and a lot less stress this year. Grateful to have you in my life.</p>
+                <p style="margin-top: 1rem; font-family: 'Chicle', cursive; color: var(--teal);">Let's make it a good one!</p>
+            </div>
+        </div>
+        <p class="instruction">Tap the envelope to open 💌</p>
+    </section>
+
+    <script>
+        // --- 1. Fireworks Logic ---
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        let fireworks = [];
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Firework {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height;
+                this.sx = Math.random() * 3 - 1.5;
+                this.sy = -(Math.random() * 4 + 10); // Initial speed up
+                this.size = 2;
+                this.hue = Math.floor(Math.random() * 360);
+            }
+            update() {
+                this.x += this.sx;
+                this.y += this.sy;
+                this.sy += 0.15; // Gravity
+                
+                // Explode when reaching peak
+                if (this.sy >= -2) {
+                    createParticles(this.x, this.y, this.hue);
+                    return true; // remove firework
+                }
+                return false;
+            }
+            draw() {
+                ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class Particle {
+            constructor(x, y, hue) {
+                this.x = x;
+                this.y = y;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 3 + 1;
+                this.sx = Math.cos(angle) * speed;
+                this.sy = Math.sin(angle) * speed;
+                this.hue = hue;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
+            }
+            update() {
+                this.x += this.sx;
+                this.y += this.sy;
+                this.sy += 0.05; // Gravity
+                this.sx *= 0.95; // Friction
+                this.sy *= 0.95;
+                this.alpha -= this.decay;
+                return this.alpha <= 0;
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function createParticles(x, y, hue) {
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle(x, y, hue));
+            }
+        }
+
+        function animateFireworks() {
+            ctx.fillStyle = 'rgba(0, 31, 63, 0.2)'; // Trail effect
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (Math.random() < 0.05) fireworks.push(new Firework());
+
+            fireworks = fireworks.filter(fw => {
+                fw.draw();
+                return !fw.update();
+            });
+
+            particles = particles.filter(p => {
+                p.draw();
+                return !p.update();
+            });
+
+            requestAnimationFrame(animateFireworks);
+        }
+        animateFireworks();
+
+
+        // --- 2. Greeting Card Animation (Intersection Observer) ---
+        // FIX: Observe the SECTION element, not the card itself. 
+        // The card is translated off-screen (-100vw), so it never "intersects" to trigger the animation.
+        const greetingSection = document.getElementById('greeting');
+        const greetingCard = document.getElementById('greeting-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    greetingCard.classList.add('visible');
+                    observer.unobserve(entry.target); // Run animation once
+                }
+            });
+        }, { threshold: 0.2 }); // Trigger when 20% of the yellow section is visible
+
+        observer.observe(greetingSection);
+
+
+        // --- 3. Bucket List Logic ---
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+        }
+
+
+        // --- 4. Music Player Logic ---
+        function playTape(el) {
+            // Remove playing class from all
+            document.querySelectorAll('.cassette').forEach(c => c.classList.remove('playing'));
+            // Add to clicked
+            el.classList.add('playing');
+        }
+
+
+        // --- 5. Loader Logic ---
+        const loaderSection = document.getElementById('loader-section');
+        const progressBar = document.getElementById('update-bar');
+        const bugText = document.getElementById('bug-text');
+        
+        const loaderObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    progressBar.style.width = '100%';
+                    simulateBugFixes();
+                    loaderObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        loaderObserver.observe(loaderSection);
+
+        function simulateBugFixes() {
+            const messages = [
+                "Removing bad vibes...",
+                "Patching heart.exe...",
+                "Downloading confidence...",
+                "Optimizing bank account...",
+                "Update Complete!"
+            ];
+            let i = 0;
+            const interval = setInterval(() => {
+                if(i < messages.length) {
+                    bugText.textContent = `> ${messages[i]}`;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 600);
+        }
+
+
+        // --- 6. Envelope Logic ---
+        function openEnvelope(el) {
+            if(!el.classList.contains('open')) {
+                el.classList.add('open');
+            } else {
+                el.classList.remove('open');
+            }
+        }
+
+    </script>
+</body>
+</html>
